@@ -1,0 +1,5 @@
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Application\bin\Debug\MvcTask.Application.dll
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Application\bin\Debug\MvcTask.Application.pdb
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Application\obj\Debug\MvcTask.Application.csprojResolveAssemblyReference.cache
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Application\obj\Debug\MvcTask.Application.dll
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Application\obj\Debug\MvcTask.Application.pdb

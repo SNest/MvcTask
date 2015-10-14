@@ -1,0 +1,10 @@
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Domain\bin\Debug\MvcTask1.Domain.dll
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Domain\bin\Debug\MvcTask1.Domain.pdb
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Domain\obj\Debug\MvcTask.Domain.csprojResolveAssemblyReference.cache
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Domain\obj\Debug\MvcTask1.Domain.dll
+E:\Repositories\MvcTask\MvcTask1\MvcTask.Domain\obj\Debug\MvcTask1.Domain.pdb
+E:\Repositories\MvcTask\MvcTask.Domain\obj\Debug\MvcTask.Domain.csprojResolveAssemblyReference.cache
+E:\Repositories\MvcTask\MvcTask.Domain\bin\Debug\MvcTask.Domain.dll
+E:\Repositories\MvcTask\MvcTask.Domain\bin\Debug\MvcTask.Domain.pdb
+E:\Repositories\MvcTask\MvcTask.Domain\obj\Debug\MvcTask.Domain.dll
+E:\Repositories\MvcTask\MvcTask.Domain\obj\Debug\MvcTask.Domain.pdb
