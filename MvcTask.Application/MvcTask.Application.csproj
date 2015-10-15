@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -38,10 +46,27 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppServices\Abstract\IAppService.cs" />
+    <Compile Include="AppServices\Concrete\CommentAppService.cs" />
+    <Compile Include="AppServices\Concrete\GameAppService.cs" />
+    <Compile Include="AppServices\Concrete\GenreAppService.cs" />
+    <Compile Include="DTOs\GameDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MvcTask.Domain\MvcTask.Domain.csproj">
+      <Project>{f79a657f-b72e-4786-97e5-9356da486c13}</Project>
+      <Name>MvcTask.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcTask.Infrastructure\MvcTask.Infrastructure.csproj">
+      <Project>{f832f148-b7c8-443a-ba9e-1d44e70b41cd}</Project>
+      <Name>MvcTask.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
