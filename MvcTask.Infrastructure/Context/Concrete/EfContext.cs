@@ -2,13 +2,14 @@
 {
     using System.Data.Entity;
 
-    using Domain.Entities.Abstract;
-    using Domain.Entities.Concrete;
-
-    using Abstract;
+    using MvcTask.Domain.Entities.Abstract;
+    using MvcTask.Domain.Entities.Concrete;
+    using MvcTask.Infrastructure.Context.Abstract;
+    using MvcTask.Infrastructure.Context.Concrete.Configuration;
 
     public class EfContext : DbContext, IContext
     {
+
         public EfContext()
             : base("DbConnection")
         {
@@ -19,12 +20,23 @@
             : base(connectionString)
         {
             Database.SetInitializer(new ContextInitializer());
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>().ToTable("Comments");
+            modelBuilder.Configurations.Add(new GameConfiguration());
+            modelBuilder.Configurations.Add(new CommentConfiguration());
+            modelBuilder.Configurations.Add(new GenreConfiguration());
+            modelBuilder.Configurations.Add(new PlatformTypeConfiguration());
+
+
         }
+
+        public IDbSet<Game> Games { get; set; }
+        public IDbSet<Comment> Comments { get; set; }
+        public IDbSet<Genre> Genres { get; set; }
+        public IDbSet<PlatformType> PlatformTypes { get; set; }
 
         public IDbSet<TEntity> Set<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>
         {

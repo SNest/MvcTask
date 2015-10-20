@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
 
-    public class PlatformType
+    public class PlatformType : Entity<long>
     {
         public PlatformType()
         {
+            
             this.Games = new HashSet<Game>();
         }
 

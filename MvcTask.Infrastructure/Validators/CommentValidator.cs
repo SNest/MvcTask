@@ -4,23 +4,22 @@
 
     using FluentValidation;
 
-    using Domain.Entities.Concrete;
-
-    using Domain.Abstract.Repositories;
+    using MvcTask.Domain.Abstract.Repositories;
+    using MvcTask.Domain.Entities.Concrete;
 
     class CommentValidator : AbstractValidator<Comment>
     {
-        private readonly ICommentRepository commentRepository;
+        private readonly ICommentRepository CommentRepository;
 
-        CommentValidator(ICommentRepository commentRepository)
+        CommentValidator(ICommentRepository CommentRepository)
         {
-            this.commentRepository = commentRepository;
+            this.CommentRepository = CommentRepository;
             this.RuleFor(comment => comment.Name).Must(this.HasUniqueName);
         }
 
         private bool HasUniqueName(string name)
         {
-            return this.commentRepository.Get().SingleOrDefault(comment => comment.Name == name) == null;
+            return this.CommentRepository.Get().SingleOrDefault(comment => comment.Name == name) == null;
         }
     }
 }

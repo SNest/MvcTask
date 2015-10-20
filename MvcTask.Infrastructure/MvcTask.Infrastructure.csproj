@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvcTask.Infrastructure</RootNamespace>
     <AssemblyName>MvcTask.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,10 +39,6 @@
       <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -55,9 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\Repositories\CommentRepository.cs" />
-    <Compile Include="Concrete\Repositories\EfGenericRepository.cs" />
+    <Compile Include="Concrete\Repositories\EfRepository.cs" />
+    <Compile Include="Concrete\Repositories\GameRepository.cs" />
+    <Compile Include="Concrete\Repositories\GenreRepository.cs" />
+    <Compile Include="Concrete\Repositories\PlatformTypeRepository.cs" />
     <Compile Include="Concrete\UnitOfWork\EfUnitOfWork.cs" />
     <Compile Include="Context\Abstract\IContext.cs" />
+    <Compile Include="Context\Concrete\Configuration\CommentConfiguration.cs" />
+    <Compile Include="Context\Concrete\Configuration\GameConfiguration.cs" />
+    <Compile Include="Context\Concrete\Configuration\GenreConfiguration.cs" />
+    <Compile Include="Context\Concrete\Configuration\PlatformTypeConfiguration.cs" />
     <Compile Include="Context\Concrete\ContextInitializer.cs" />
     <Compile Include="Context\Concrete\EfContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,12 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -3,13 +3,20 @@
     using System.Data.Entity.Validation;
     using System.Text;
 
-    using Domain.Abstract.Repositories;
-    using Domain.Entities.Abstract;
-    using Repositories;
-    using Context.Abstract;
+    using MvcTask.Domain.Abstract.Repositories;
+    using MvcTask.Domain.Abstract.UnitOfWork;
+    using MvcTask.Domain.Entities.Abstract;
+    using MvcTask.Infrastructure.Concrete.Repositories;
+    using MvcTask.Infrastructure.Context.Abstract;
 
-    internal class EfUnitOfWork
+    public class EfUnitOfWork : IUnitOfWork
     {
+        private ICommentRepository commentRepository;
+
+        private IGameRepository gameRepository;
+        private IGenreRepository genreRepository;
+        private IPlatformTypeRepository platformTypeRepository;
+
         private readonly IContext db;
 
         public EfUnitOfWork(IContext db)
@@ -17,11 +24,43 @@
             this.db = db;
         }
 
-        public IGenericRepository<TEntity, TPrimaryKey> Entities<TEntity, TPrimaryKey>()
+        public IGameRepository Games
+        {
+            get
+            {
+                return this.gameRepository ?? (this.gameRepository = new GameRepository(this.db));
+            }
+        }
+
+        public ICommentRepository Comments
+        {
+            get
+            {
+                return this.commentRepository ?? (this.commentRepository = new CommentRepository(this.db));
+            }
+        }
+
+        public IGenreRepository Genres
+        {
+            get
+            {
+                return this.genreRepository ?? (this.genreRepository = new GenreRepository(this.db));
+            }
+        }
+
+        public IPlatformTypeRepository PlatformTypes
+        {
+            get
+            {
+                return this.platformTypeRepository ?? (this.platformTypeRepository = new PlatformTypeRepository(this.db));
+            }
+        }
+
+
+        public IRepository<TEntity, TPrimaryKey> Entities<TEntity, TPrimaryKey>()
             where TEntity : class, IEntity<TPrimaryKey>
         {
-            IGenericRepository<TEntity, TPrimaryKey> entityRepository =
-                new EfGenericRepository<TEntity, TPrimaryKey>(this.db);
+            IRepository<TEntity, TPrimaryKey> entityRepository = new EfRepository<TEntity, TPrimaryKey>(this.db);
             return entityRepository;
         }
 

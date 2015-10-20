@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTask.Infrastructure", "MvcTask.Infrastructure\MvcTask.Infrastructure.csproj", "{F832F148-B7C8-443A-BA9E-1D44E70B41CD}"
 EndProject

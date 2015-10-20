@@ -3,7 +3,7 @@
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
 
-    using Domain.Entities.Abstract;
+    using MvcTask.Domain.Entities.Abstract;
 
     public interface IContext
     {

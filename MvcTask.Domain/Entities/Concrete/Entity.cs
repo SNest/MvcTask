@@ -1,6 +1,6 @@
 ﻿namespace MvcTask.Domain.Entities.Concrete
 {
-    using Abstract;
+    using MvcTask.Domain.Entities.Abstract;
 
     public class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
     {

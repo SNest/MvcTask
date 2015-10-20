@@ -1,12 +1,19 @@
 ﻿namespace MvcTask.Domain.Abstract.UnitOfWork
 {
-    using Repositories;
-    using Entities.Abstract;
+    using MvcTask.Domain.Abstract.Repositories;
+    using MvcTask.Domain.Entities.Abstract;
 
     public interface IUnitOfWork
     {
-        IGenericRepository<TEntity, TPrimaryKey> Entities<TEntity, TPrimaryKey>()
-            where TEntity : class, IEntity<TPrimaryKey>;
+        IGameRepository Games { get; }
+
+        ICommentRepository Comments { get; }
+
+        IGenreRepository Genres { get; }
+
+        IPlatformTypeRepository PlatformTypes { get; }
+
+        IRepository<TEntity, TPrimaryKey> Entities<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>;
 
         void Save();
     }

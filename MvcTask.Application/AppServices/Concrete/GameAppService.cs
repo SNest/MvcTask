@@ -1,82 +1,76 @@
 ﻿namespace MvcTask.Application.AppServices.Concrete
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.IO.MemoryMappedFiles;
     using System.Linq;
-
-    using Abstract;
 
     using AutoMapper;
 
-    using Domain.Abstract.UnitOfWork;
-    using Domain.Entities.Concrete;
-
-    using MvcTask.Application.DTOs;
+    using MvcTask.Application.AppServices.Abstract;
+    using MvcTask.Application.DTOs.Concrete;
+    using MvcTask.Application.Utils;
+    using MvcTask.Domain.Abstract.UnitOfWork;
+    using MvcTask.Domain.Entities.Concrete;
 
     using NLog;
 
-    internal class GameAppService : IAppService
+    public class GameAppService : IGameAppService
     {
-        private readonly Logger logger;
+        private readonly ILogger logger;
 
         private readonly IUnitOfWork unitOfWork;
 
-        public GameAppService(IUnitOfWork unitOfWork)
+        public GameAppService(IUnitOfWork unitOfWork, ILogger logger)
         {
             this.unitOfWork = unitOfWork;
-            this.logger = LogManager.GetCurrentClassLogger();
+            this.logger = logger;
         }
 
-        public void CreateGame(Game game)
+        public virtual IEnumerable<GameDto> Get()
         {
             try
             {
-                this.unitOfWork.Entities<Game, Guid>().Create(game);
+                var query = this.unitOfWork.Entities<Game, long>().Get();
+                if (query != null)
+                {
+                    return Mapper.Map<List<GameDto>>(query);
+                }
             }
             catch (Exception exception)
             {
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
+            throw new ValidationException(String.Format("Items of {0} are not found", typeof(Game).Name), "");
         }
 
-        public void EditGame(Game game)
+        public virtual GameDto Get(long id)
         {
             try
             {
-                this.unitOfWork.Entities<Game, Guid>().Update(game);
+                var query = this.unitOfWork.Entities<Game, long>().Get(id);
+                if (query != null)
+                {
+                    return Mapper.Map<GameDto>(query);
+                }
             }
             catch (Exception exception)
             {
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
-        }
-
-        public void DeleteGame(Guid id)
-        {
-            try
-            {
-                this.unitOfWork.Entities<Game, Guid>().Delete(id);
-            }
-            catch (Exception exception)
-            {
-                this.logger.Trace(exception.StackTrace);
-                throw;
-            }
+            throw new ValidationException(String.Format("Item of {0} is not found", typeof(Game).Name), "");
         }
 
         public GameDto GetByKey(string key)
         {
-            var game = new GameDto();
+            var instance = new GameDto();
             try
             {
-                var query = this.unitOfWork.Entities<Game, Guid>().;
+                var query = this.unitOfWork.Entities<Game, long>().Find(game => game.Key == key).SingleOrDefault();
                 if (query != null)
                 {
-                    games = Mapper.Map<List<GameDto>>(query);
+                    instance = Mapper.Map<GameDto>(query);
                 }
             }
             catch (Exception exception)
@@ -84,25 +78,73 @@
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
+            return instance;
         }
 
-        public IEnumerable<GameDto> GetAll()
+        public IEnumerable<GameDto> GetByGenre(string name)
         {
-            var games = new List<GameDto>();
+            var instance = new List<GameDto>();
             try
             {
-                var query = this.unitOfWork.Entities<Game, Guid>().Get();
-                if (query != null)
-                {
-                    games = Mapper.Map<List<GameDto>>(query);
-                }
+                ////var genres = this.unitOfWork.Entities<Genre, long>().Find(genre => genre.Name == name).ToList();
+                ////var subGenres = this.unitOfWork.Entities<Genre, long>().Find(genre => genre.Name == name).Select(genre => genre.ChildGenres).Cast<>();
+
+                ////var query = genres.Join(subGenres);
+
+                //if (query != null)
+                //{
+                //    instance = Mapper.Map<List<GameDto>>(query);
+                //}
             }
             catch (Exception exception)
             {
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
-            return games;
+            return instance;
+        }
+
+        public IEnumerable<GameDto> GetByPlatformTypes(List<int> platformIdList)
+        {
+            if (platformIdList == null) throw new ValidationException("paltformList is empty", "paltformList");
+            if (platformIdList.Select(Id => this.unitOfWork.PlatformTypes.Get(Id)).Any(platformType => platformType == null))
+            {
+                throw new ValidationException("Unexisting PlatforType id", "Id");
+            }
+            var games = new List<Game>();
+            foreach (var platformType in platformIdList.Select(id => this.unitOfWork.PlatformTypes.Find(x => x.Id == id).FirstOrDefault()).Where(platformType => platformType != null))
+            {
+                games.AddRange(platformType.Games);
+            }
+
+            return Mapper.Map<IEnumerable<Game>, List<GameDto>>(games);
+        }
+
+        public virtual void Create(GameDto item)
+        {
+            if (!this.IsUniqueKey(item.Key))
+            {
+                throw new ValidationException("Key is not unique", "Key");
+            }
+            this.unitOfWork.Entities<Game, long>().Create(Mapper.Map<Game>(item));
+            this.unitOfWork.Save();
+        }
+
+        public virtual void Update(GameDto item)
+        {
+            this.unitOfWork.Entities<Game, long>().Update(Mapper.Map<Game>(item));
+            this.unitOfWork.Save();
+        }
+
+        public virtual void Delete(long id)
+        {
+            this.unitOfWork.Entities<Game, long>().Delete(id);
+        }
+
+        private bool IsUniqueKey(string key)
+        {
+            var game = this.unitOfWork.Entities<Game, long>().Get().FirstOrDefault(x => x.Key == key);
+            return game == null;
         }
     }
 }

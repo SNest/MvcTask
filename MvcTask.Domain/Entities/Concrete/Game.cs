@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MvcTask.Domain.Entities.Concrete
+﻿namespace MvcTask.Domain.Entities.Concrete
 {
-    public class Game: Entity<Guid>
+    using System.Collections.Generic;
+
+    public class Game: Entity<long>
     {
         public Game()
         {

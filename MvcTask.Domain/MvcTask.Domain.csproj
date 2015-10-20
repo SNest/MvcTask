@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvcTask.Domain</RootNamespace>
     <AssemblyName>MvcTask.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\Repositories\ICommentRepository.cs" />
-    <Compile Include="Abstract\Repositories\IGenericRepository.cs" />
+    <Compile Include="Abstract\Repositories\IGameRepository.cs" />
+    <Compile Include="Abstract\Repositories\IGenreRepository.cs" />
+    <Compile Include="Abstract\Repositories\IPlatformTypeRepository.cs" />
+    <Compile Include="Abstract\Repositories\IRepository.cs" />
     <Compile Include="Abstract\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Entities\Concrete\Comment.cs" />
     <Compile Include="Entities\Concrete\Entity.cs" />

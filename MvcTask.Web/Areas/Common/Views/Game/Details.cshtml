@@ -1,0 +1,15 @@
+﻿@model MvcTask.Web.Models.GameViewModel
+
+@{
+    this.ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>GameViewModel</legend>
+</fieldset>
+<p>
+    @(this.Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ })) |
+    @(this.Html.ActionLink("Back to List", "Index"))
+</p>

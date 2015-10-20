@@ -1,12 +1,8 @@
 ﻿namespace MvcTask.Domain.Abstract.Repositories
 {
-    using System;
-    using System.Collections.Generic;
+    using MvcTask.Domain.Entities.Concrete;
 
-    using Entities.Concrete;
-
-    public interface ICommentRepository: IGenericRepository<Comment, Guid>
+    public interface ICommentRepository : IRepository<Comment, long>
     {
-        IEnumerable<Comment> Find(Func<Comment, bool> predicate);
     }
 }
