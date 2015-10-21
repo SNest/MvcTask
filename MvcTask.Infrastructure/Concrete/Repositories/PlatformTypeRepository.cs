@@ -4,7 +4,7 @@
     using MvcTask.Domain.Entities.Concrete;
     using MvcTask.Infrastructure.Context.Abstract;
 
-    class PlatformTypeRepository : EfRepository<PlatformType, long>, IPlatformTypeRepository
+    public class PlatformTypeRepository : EfRepository<PlatformType, long>, IPlatformTypeRepository
     {
          private readonly IContext db;
 

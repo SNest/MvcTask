@@ -5,7 +5,7 @@ namespace MvcTask.Infrastructure.Concrete.Repositories
     using MvcTask.Domain.Entities.Concrete;
     using MvcTask.Infrastructure.Context.Abstract;
 
-    class GenreRepository : EfRepository<Genre, long>, IGenreRepository
+    public class GenreRepository : EfRepository<Genre, long>, IGenreRepository
     {
          private readonly IContext db;
 

@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5721C220-A801-4A38-97FA-67A8B9EE15A3}</ProjectGuid>
+    <ProjectGuid>{1E4CFCED-B810-4BCB-9D79-17986D8F1D9D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcTask.Tests</RootNamespace>
-    <AssemblyName>MvcTask.Tests</AssemblyName>
+    <RootNamespace>MvcTask.UnitTests</RootNamespace>
+    <AssemblyName>MvcTask.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -44,6 +44,10 @@
       <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -59,12 +63,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DalTests\GameAppServiceTest.cs" />
-    <Compile Include="PlTests\GameControllerTest.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BllTests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTask.Application\MvcTask.Application.csproj">
@@ -83,6 +83,10 @@
       <Project>{854ed4a7-4aca-493c-bdc9-4085ea071c91}</Project>
       <Name>MvcTask.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BllUnitTests\" />
+    <Folder Include="DalUnitTests\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

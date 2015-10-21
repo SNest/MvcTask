@@ -30,89 +30,123 @@
         {
             try
             {
-                var query = this.unitOfWork.Entities<Game, long>().Get();
-                if (query != null)
+                var query = this.unitOfWork.Games.Get();
+                if (query == null)
                 {
-                    return Mapper.Map<List<GameDto>>(query);
+                    throw new ValidationException(String.Format("Items of {0} are not found", typeof(Game).Name), "");
                 }
+                return Mapper.Map<List<GameDto>>(query);
+            }
+            catch (ValidationException exception)
+            {
+                this.logger.Debug(exception.Message);
+                throw;
             }
             catch (Exception exception)
             {
+                this.logger.Error(exception.Message);
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
-            throw new ValidationException(String.Format("Items of {0} are not found", typeof(Game).Name), "");
         }
 
         public virtual GameDto Get(long id)
         {
             try
             {
-                var query = this.unitOfWork.Entities<Game, long>().Get(id);
-                if (query != null)
+                if (id <= 0)
                 {
-                    return Mapper.Map<GameDto>(query);
+                    throw new ValidationException("Id must be greater than 0", "id");
                 }
+                var query = this.unitOfWork.Games.Get(id);
+                if (query == null)
+                {
+                    throw new ValidationException(String.Format("Item of {0} is not found", typeof(Game).Name), "");
+                }
+                return Mapper.Map<GameDto>(query);
+            }
+            catch (ValidationException exception)
+            {
+                this.logger.Debug(exception.Message);
+                throw;
             }
             catch (Exception exception)
             {
+                this.logger.Error(exception.Message);
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
-            throw new ValidationException(String.Format("Item of {0} is not found", typeof(Game).Name), "");
         }
 
         public GameDto GetByKey(string key)
         {
-            var instance = new GameDto();
             try
             {
-                var query = this.unitOfWork.Entities<Game, long>().Find(game => game.Key == key).SingleOrDefault();
-                if (query != null)
+                var query = this.unitOfWork.Games.Find(game => game.Key == key).SingleOrDefault();
+                if (query == null)
                 {
-                    instance = Mapper.Map<GameDto>(query);
+                    throw new ValidationException(String.Format("Item of {0} is not found", typeof(Game).Name), "");
                 }
+                return Mapper.Map<GameDto>(query);
+            }
+            catch (ValidationException exception)
+            {
+                this.logger.Debug(exception.Message);
+                throw;
             }
             catch (Exception exception)
             {
+                this.logger.Error(exception.Message);
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
-            return instance;
         }
 
-        public IEnumerable<GameDto> GetByGenre(string name)
+        public IEnumerable<GameDto> GetByGenre(long id)
         {
-            var instance = new List<GameDto>();
             try
             {
-                ////var genres = this.unitOfWork.Entities<Genre, long>().Find(genre => genre.Name == name).ToList();
-                ////var subGenres = this.unitOfWork.Entities<Genre, long>().Find(genre => genre.Name == name).Select(genre => genre.ChildGenres).Cast<>();
-
-                ////var query = genres.Join(subGenres);
-
-                //if (query != null)
-                //{
-                //    instance = Mapper.Map<List<GameDto>>(query);
-                //}
+                if (id <= 0)
+                {
+                    throw new ValidationException("Invalid id", "id");
+                }
+                var query = this.unitOfWork.Genres.Get(id);
+                if (query == null)
+                {
+                    throw new ValidationException(String.Format("Item of {0} is not found", typeof(Game).Name), "");
+                }
+                return Mapper.Map<IEnumerable<GameDto>>(
+                    this.unitOfWork.Games.Get().Where(x => x.Genres.Contains(query)));
+            }
+            catch (ValidationException exception)
+            {
+                this.logger.Debug(exception.Message);
+                throw;
             }
             catch (Exception exception)
             {
+                this.logger.Error(exception.Message);
                 this.logger.Trace(exception.StackTrace);
                 throw;
             }
-            return instance;
         }
 
         public IEnumerable<GameDto> GetByPlatformTypes(List<int> platformIdList)
         {
-            if (platformIdList == null) throw new ValidationException("paltformList is empty", "paltformList");
-            if (platformIdList.Select(Id => this.unitOfWork.PlatformTypes.Get(Id)).Any(platformType => platformType == null))
+            if (platformIdList == null)
+            {
+                throw new ValidationException("paltformList is empty", "paltformList");
+            }
+            if (
+                platformIdList.Select(Id => this.unitOfWork.PlatformTypes.Get(Id))
+                    .Any(platformType => platformType == null))
             {
                 throw new ValidationException("Unexisting PlatforType id", "Id");
             }
             var games = new List<Game>();
-            foreach (var platformType in platformIdList.Select(id => this.unitOfWork.PlatformTypes.Find(x => x.Id == id).FirstOrDefault()).Where(platformType => platformType != null))
+            foreach (var platformType in
+                platformIdList.Select(id => this.unitOfWork.PlatformTypes.Find(x => x.Id == id).FirstOrDefault())
+                    .Where(platformType => platformType != null))
             {
                 games.AddRange(platformType.Games);
             }
@@ -122,28 +156,76 @@
 
         public virtual void Create(GameDto item)
         {
-            if (!this.IsUniqueKey(item.Key))
+            try
             {
-                throw new ValidationException("Key is not unique", "Key");
+                if (item == null)
+                {
+                    throw new ValidationException("Invalid id", "id");
+                }
+                if (!this.IsUniqueKey(item.Key))
+                {
+                    throw new ValidationException("Key is not unique", "Key");
+                }
+                this.unitOfWork.Games.Create(Mapper.Map<Game>(item));
+                this.unitOfWork.Save();
             }
-            this.unitOfWork.Entities<Game, long>().Create(Mapper.Map<Game>(item));
-            this.unitOfWork.Save();
+            catch (ValidationException exception)
+            {
+                this.logger.Debug(exception.Message);
+                throw;
+            }
+            catch (Exception exception)
+            {
+                this.logger.Error(exception.Message);
+                this.logger.Trace(exception.StackTrace);
+                throw;
+            }
         }
 
         public virtual void Update(GameDto item)
         {
-            this.unitOfWork.Entities<Game, long>().Update(Mapper.Map<Game>(item));
-            this.unitOfWork.Save();
+            try
+            {
+                if (item == null)
+                {
+                    throw new ValidationException("Item can not be null", "Key");
+                }
+                this.unitOfWork.Games.Update(Mapper.Map<Game>(item));
+                this.unitOfWork.Save();
+            }
+            catch (ValidationException exception)
+            {
+                this.logger.Debug(exception.Message);
+                throw;
+            }
+            catch (Exception exception)
+            {
+                this.logger.Error(exception.Message);
+                this.logger.Trace(exception.StackTrace);
+                throw;
+            }
         }
 
         public virtual void Delete(long id)
         {
-            this.unitOfWork.Entities<Game, long>().Delete(id);
+            try
+            {
+                if (id <= 0)
+                {
+                    throw new ValidationException("Invalid id", "");
+                }
+                this.unitOfWork.Games.Delete(id);
+            }
+            catch (Exception exception)
+            {
+                this.logger.Trace(exception.StackTrace);
+                throw;
+            }
         }
 
         private bool IsUniqueKey(string key)
         {
-            var game = this.unitOfWork.Entities<Game, long>().Get().FirstOrDefault(x => x.Key == key);
+            var game = this.unitOfWork.Games.Get().FirstOrDefault(x => x.Key == key);
             return game == null;
         }
     }

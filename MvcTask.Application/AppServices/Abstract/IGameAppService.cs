@@ -12,7 +12,7 @@
 
         GameDto GetByKey(string key);
 
-        IEnumerable<GameDto> GetByGenre(string name);
+        IEnumerable<GameDto> GetByGenre(long id);
 
         IEnumerable<GameDto> GetByPlatformTypes(List<int> platformIdList);
 
