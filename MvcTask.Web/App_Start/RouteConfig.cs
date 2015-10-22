@@ -10,34 +10,26 @@
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-               "PublisherBase",
-               "{controller}/{companyName}",
-               new { action = "Details" },
-               new { controller = "Publisher" }).DataTokens.Add("area", "Common");
+                "Create", 
+                "{controller}/new",
+                new { action = "Create" }).DataTokens.Add("area", "Common");
 
             routes.MapRoute(
-              "PublisherNew",
-              "{controller}/new",
-              new { action = "Create" },
-              new { controller = "Publisher" }).DataTokens.Add("area", "Common");
+                "Edit", 
+                "{controller}/update",
+                new { action = "Edit" }).DataTokens.Add("area", "Common");
 
             routes.MapRoute(
-              "GameNew",
-              "{controller}/new",
-              new { action = "Create" },
-              new { controller = "Game" }).DataTokens.Add("area", "Common");
-
-            routes.MapRoute(
-              "GameUpdate",
-              "{controller}/update",
-              new { action = "Edit" },
-              new { controller = "Game" }).DataTokens.Add("area", "Common"); 
-
-            routes.MapRoute(
-                "GameBase",
-                "{controller}/{gameKey}/{action}",
+                "Game",
+                "{controller}/{gamekey}/{action}",
                 new { action = "Details" },
-                new { controller = "Game" }).DataTokens.Add("area", "Common"); ;
+                new { controller = "Game" }).DataTokens.Add("area", "Common");
+
+            routes.MapRoute(
+                "Publisher",
+                "{controller}/{companyname}/{action}",
+                new { action = "Details" },
+                new { controller = "Publisher" }).DataTokens.Add("area", "Common");
 
             routes.MapRoute(
                 "Default",

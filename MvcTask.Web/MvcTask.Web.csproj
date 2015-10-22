@@ -163,6 +163,7 @@
     <Compile Include="Areas\Common\Controllers\CommentController.cs" />
     <Compile Include="Areas\Common\Controllers\GameController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Common\Controllers\GamesController.cs" />
     <Compile Include="Areas\Common\Controllers\HomeController.cs" />
     <Compile Include="Areas\Common\Controllers\PublisherController.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
@@ -208,6 +209,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\DisplayTemplates\GameListTemplate.cshtml" />
+    <Content Include="Views\Shared\_GameCount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
