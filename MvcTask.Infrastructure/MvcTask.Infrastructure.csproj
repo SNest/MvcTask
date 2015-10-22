@@ -61,7 +61,10 @@
     <Compile Include="Context\Concrete\Configuration\CommentConfiguration.cs" />
     <Compile Include="Context\Concrete\Configuration\GameConfiguration.cs" />
     <Compile Include="Context\Concrete\Configuration\GenreConfiguration.cs" />
+    <Compile Include="Context\Concrete\Configuration\OrderConfiguration.cs" />
+    <Compile Include="Context\Concrete\Configuration\OrderDetailsConfiguration.cs" />
     <Compile Include="Context\Concrete\Configuration\PlatformTypeConfiguration.cs" />
+    <Compile Include="Context\Concrete\Configuration\PublisherConfiguration.cs" />
     <Compile Include="Context\Concrete\ContextInitializer.cs" />
     <Compile Include="Context\Concrete\EfContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

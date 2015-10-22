@@ -6,7 +6,6 @@
     {
         public Genre()
         {
-            
             this.ChildGenres = new HashSet<Genre>();
             this.Games = new HashSet<Game>();
         }

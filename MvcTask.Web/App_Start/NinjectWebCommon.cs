@@ -77,6 +77,7 @@ namespace MvcTask.Web
 
             kernel.Bind<IGameAppService>().To<GameAppService>();
             kernel.Bind<ICommentAppService>().To<CommentAppService>();
+            kernel.Bind<IPublisherAppService>().To<PublisherAppService>();
    
         }        
     }

@@ -65,14 +65,17 @@
   <ItemGroup>
     <Compile Include="AppServices\Abstract\ICommentAppService.cs" />
     <Compile Include="AppServices\Abstract\IGameAppService.cs" />
+    <Compile Include="AppServices\Abstract\IPublisherAppService.cs" />
     <Compile Include="AppServices\Concrete\CommentAppService.cs" />
     <Compile Include="AppServices\Concrete\GameAppService.cs" />
+    <Compile Include="AppServices\Concrete\PublisherAppService.cs" />
     <Compile Include="DTOs\Abstract\IDto.cs" />
     <Compile Include="DTOs\Concrete\CommentDto.cs" />
     <Compile Include="DTOs\Concrete\Dto.cs" />
     <Compile Include="DTOs\Concrete\GameDto.cs" />
     <Compile Include="DTOs\Concrete\GenreDto.cs" />
     <Compile Include="DTOs\Concrete\PlatformTypeDto.cs" />
+    <Compile Include="DTOs\Concrete\PublisherDto.cs" />
     <Compile Include="Utils\ValidationException.cs" />
     <Compile Include="Utils\ApplicationMappingProfile.cs" />
     <Compile Include="Utils\ServiceModule.cs" />

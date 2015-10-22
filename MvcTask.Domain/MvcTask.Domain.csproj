@@ -52,7 +52,10 @@
     <Compile Include="Entities\Concrete\Game.cs" />
     <Compile Include="Entities\Abstract\IEntity.cs" />
     <Compile Include="Entities\Concrete\Genre.cs" />
+    <Compile Include="Entities\Concrete\Order.cs" />
+    <Compile Include="Entities\Concrete\OrderDetails.cs" />
     <Compile Include="Entities\Concrete\PlatformType.cs" />
+    <Compile Include="Entities\Concrete\Publisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

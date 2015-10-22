@@ -16,6 +16,8 @@
             Mapper.CreateMap<Genre, GenreDto>().ReverseMap();
 
             Mapper.CreateMap<PlatformType, PlatformTypeDto>().ReverseMap();
+
+            Mapper.CreateMap<Publisher, PublisherDto>().ReverseMap();
         }
     }
 }

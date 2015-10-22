@@ -21,6 +21,5 @@
         void Update(GameDto item);
 
         void Delete(long id);
-       
     }
 }

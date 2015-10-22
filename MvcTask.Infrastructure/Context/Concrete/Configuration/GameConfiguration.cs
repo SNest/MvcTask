@@ -14,6 +14,9 @@
             this.Property(x => x.Name).IsRequired()
                                  .HasMaxLength(50);
             this.Property(x => x.Description).IsRequired();
+            this.Property(x => x.Price).HasColumnType("money").IsRequired();
+            this.Property(x => x.UnitsInStock).HasColumnType("smallint").IsRequired();
+            this.Property(x => x.Discontinued).HasColumnType("bit").IsRequired();
         }
     }
 }

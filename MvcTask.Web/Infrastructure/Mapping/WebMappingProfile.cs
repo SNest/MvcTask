@@ -10,7 +10,8 @@
         protected override void Configure()
         {
             Mapper.CreateMap<CommentDto, CommentViewModel>().ReverseMap();
-            Mapper.CreateMap<GameDto, GameViewModel>().ReverseMap(); 
+            Mapper.CreateMap<GameDto, GameViewModel>().ReverseMap();
+            Mapper.CreateMap<PublisherDto, PublisherViewModel>().ReverseMap(); 
         }
     }
 }

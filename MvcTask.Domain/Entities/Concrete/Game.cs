@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Game: Entity<long>
+    public class Game : Entity<long>
     {
         public Game()
         {
@@ -10,11 +10,22 @@
             this.Genres = new HashSet<Genre>();
             this.PlatformTypes = new HashSet<PlatformType>();
         }
+
         public string Key { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public decimal Price { get; set; }
+
+        public short UnitsInStock { get; set; }
+
+        public bool Discontinued { get; set; }
+
+        public long? PublisherId { get; set; }
+
+        public Publisher Publisher { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 

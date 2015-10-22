@@ -164,6 +164,7 @@
     <Compile Include="Areas\Common\Controllers\GameController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Common\Controllers\PublisherController.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Filters\HandleAllErrorAttribute.cs" />
@@ -172,11 +173,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mapping\Profiles\PublisherDtoProfile.cs" />
     <Compile Include="Infrastructure\Mapping\Profiles\CommentDtoProfile.cs" />
     <Compile Include="Infrastructure\Mapping\Profiles\GameDtoProfile.cs" />
     <Compile Include="Infrastructure\Mapping\WebMappingProfile.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
+    <Compile Include="Models\PublisherViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +187,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="Areas\Common\Views\Game\Index.cshtml" />
+    <Content Include="Areas\Common\Views\Publisher\Details.cshtml" />
+    <Content Include="Areas\Common\Views\Publisher\New.cshtml" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -192,6 +207,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\DisplayTemplates\GameListTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -233,7 +249,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Common\Views\Game\Index.cshtml" />
     <Content Include="Areas\Common\Views\Game\Details.cshtml" />
     <Content Include="Areas\Common\Views\Game\Create.cshtml" />
     <Content Include="Areas\Common\Views\Game\Edit.cshtml" />
@@ -246,6 +261,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NewGameTemplate.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

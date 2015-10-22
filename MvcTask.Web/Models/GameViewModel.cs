@@ -14,6 +14,12 @@
 
         public string Description { get; set; }
 
+        public decimal Price { get; set; }
+
+        public short UnitsInStock { get; set; }
+
+        public bool Discontinued { get; set; }
+
         public IEnumerable<CommentDto> Comments { get; set; }
 
         public IEnumerable<GenreDto> Genres { get; set; }

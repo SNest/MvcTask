@@ -9,7 +9,6 @@
 
     public class EfContext : DbContext, IContext
     {
-
         public EfContext()
             : base("DbConnection")
         {
@@ -23,24 +22,28 @@
             this.Configuration.ProxyCreationEnabled = false;
         }
 
+        public IDbSet<Game> Games { get; set; }
+
+        public IDbSet<Comment> Comments { get; set; }
+
+        public IDbSet<Genre> Genres { get; set; }
+
+        public IDbSet<PlatformType> PlatformTypes { get; set; }
+
+        public IDbSet<TEntity> Set<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>
+        {
+            return base.Set<TEntity>();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new GameConfiguration());
             modelBuilder.Configurations.Add(new CommentConfiguration());
             modelBuilder.Configurations.Add(new GenreConfiguration());
             modelBuilder.Configurations.Add(new PlatformTypeConfiguration());
-
-
-        }
-
-        public IDbSet<Game> Games { get; set; }
-        public IDbSet<Comment> Comments { get; set; }
-        public IDbSet<Genre> Genres { get; set; }
-        public IDbSet<PlatformType> PlatformTypes { get; set; }
-
-        public IDbSet<TEntity> Set<TEntity, TPrimaryKey>() where TEntity : class, IEntity<TPrimaryKey>
-        {
-            return base.Set<TEntity>();
+            modelBuilder.Configurations.Add(new PublisherConfiguration());
+            modelBuilder.Configurations.Add(new OrderConfiguration());
+            modelBuilder.Configurations.Add(new OrderDetailsConfiguration());
         }
     }
 }

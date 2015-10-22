@@ -83,7 +83,6 @@
                         sb.AppendLine();
                     }
                 }
-
                 throw new DbEntityValidationException("Entity Validation Failed - errors follow:\n" + sb, ex);
             }
         }

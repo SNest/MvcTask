@@ -2,51 +2,20 @@
 
 @{
     this.ViewBag.Title = "Create";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<fieldset>
+    <legend>Create new game</legend>
+    @using (this.Html.BeginForm())
+    {
+        @(this.Html.AntiForgeryToken())
+        @(this.Html.ValidationSummary(true))
 
-@using (this.Html.BeginForm()) {
-    @(this.Html.AntiForgeryToken())
-    @(this.Html.ValidationSummary(true))
-
-    <fieldset>
-        <legend>GameViewModel</legend>
-
-        <div class="editor-label">
-            @(this.Html.LabelFor(model => model.Key))
-        </div>
-        <div class="editor-field">
-            @(this.Html.EditorFor(model => model.Key))
-            @(this.Html.ValidationMessageFor(model => model.Key))
-        </div>
-
-        <div class="editor-label">
-            @(this.Html.LabelFor(model => model.Name))
-        </div>
-        <div class="editor-field">
-            @(this.Html.EditorFor(model => model.Name))
-            @(this.Html.ValidationMessageFor(model => model.Name))
-        </div>
-
-        <div class="editor-label">
-            @(this.Html.LabelFor(model => model.Description))
-        </div>
-        <div class="editor-field">
-            @(this.Html.EditorFor(model => model.Description))
-            @(this.Html.ValidationMessageFor(model => model.Description))
-        </div>
+        @(this.Html.EditorForModel("NewGameTemplate"))
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create"/>
         </p>
-    </fieldset>
-}
-
-<div>
-    @(this.Html.ActionLink("Back to List", "Index"))
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    }
+</fieldset>

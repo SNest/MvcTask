@@ -20,12 +20,12 @@
 
         public ActionResult Index()
         {
-            return this.Json(Mapper.Map<IEnumerable<GameDto>>(this.gameAppService.Get()), JsonRequestBehavior.AllowGet);
+            return this.View(Mapper.Map<IEnumerable<GameViewModel>>(this.gameAppService.Get()));
         }
 
-        public ActionResult Details(long id)
+        public ActionResult Details(string key)
         {
-            return this.Json(Mapper.Map<GameViewModel>(this.gameAppService.Get(id)), JsonRequestBehavior.AllowGet);
+            return this.View(Mapper.Map<GameViewModel>(this.gameAppService.GetByKey(key)));
         }
 
         public ActionResult Create()

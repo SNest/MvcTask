@@ -1,0 +1,49 @@
+﻿@model MvcTask.Web.Models.GameViewModel
+
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Key))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.Key))
+    @(this.Html.ValidationMessageFor(model => model.Key))
+</div>
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Name))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.Name))
+    @(this.Html.ValidationMessageFor(model => model.Name))
+</div>
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Description))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.Description))
+    @(this.Html.ValidationMessageFor(model => model.Description))
+</div>
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Price))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.Price))
+    @(this.Html.ValidationMessageFor(model => model.Price))
+</div>
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.UnitsInStock))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.UnitsInStock))
+    @(this.Html.ValidationMessageFor(model => model.UnitsInStock))
+</div>
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Discontinued))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.Discontinued))
+</div>
