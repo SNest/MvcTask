@@ -34,7 +34,7 @@
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional })
+                new { controller = "Game", action = "Index", id = UrlParameter.Optional })
                 .DataTokens.Add("area", "Common");
         }
     }

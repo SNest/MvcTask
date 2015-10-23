@@ -1,4 +1,4 @@
-﻿@model MvcTask.Web.Models.GameViewModel
+﻿@model MvcTask.Web.Areas.Common.Models.GameCreateViewModel
 
 
 <div class="editor-label">
@@ -21,7 +21,7 @@
     @(this.Html.LabelFor(model => model.Description))
 </div>
 <div class="editor-field">
-    @(this.Html.EditorFor(model => model.Description))
+    @(this.Html.TextAreaFor(model => model.Description))
     @(this.Html.ValidationMessageFor(model => model.Description))
 </div>
 
@@ -41,9 +41,36 @@
     @(this.Html.ValidationMessageFor(model => model.UnitsInStock))
 </div>
 
-<div class="editor-label">
-    @(this.Html.LabelFor(model => model.Discontinued))
+@*<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Publishers))
 </div>
 <div class="editor-field">
-    @(this.Html.EditorFor(model => model.Discontinued))
+    @(this.Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.Publishers, 
+                               "ContribId", "Value", 
+                               Model.Publishers.First())
+    @(this.Html.ValidationMessageFor(model => model.PublisherId))))
+</div>*@
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.Publishers))
 </div>
+<div class="editor-field">
+    @(this.Html.DropDownListFor(model => model.Publishers, (SelectList)ViewBag.Pablishers))
+    @(this.Html.ValidationMessageFor(model => model.PublisherId))))
+</div>
+
+@*<div class="editor-label">
+    @(this.Html.LabelFor(model => model.PublisherId))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.PublisherId))
+    @(this.Html.ValidationMessageFor(model => model.PublisherId))
+</div>
+
+<div class="editor-label">
+    @(this.Html.LabelFor(model => model.PublisherId))
+</div>
+<div class="editor-field">
+    @(this.Html.EditorFor(model => model.PublisherId))
+    @(this.Html.ValidationMessageFor(model => model.PublisherId))
+</div>*@

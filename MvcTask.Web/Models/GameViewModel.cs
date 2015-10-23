@@ -20,7 +20,11 @@
 
         public bool Discontinued { get; set; }
 
-        public IEnumerable<CommentDto> Comments { get; set; }
+        public long? PublisherId { get; set; }
+
+        public PublisherViewModel Publisher { get; set; }
+
+        public IEnumerable<CommentViewModel> Comments { get; set; }
 
         public IEnumerable<GenreDto> Genres { get; set; }
 

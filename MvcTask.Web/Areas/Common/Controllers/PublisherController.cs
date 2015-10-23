@@ -26,14 +26,14 @@
         }
 
         [HttpGet]
-        public ActionResult New()
+        public ActionResult Create()
         {
             return this.View();
         }
 
         
         [HttpPost]
-        public ActionResult New(PublisherViewModel publisher)
+        public ActionResult Create(PublisherViewModel publisher)
         {
             if (this.ModelState.IsValid)
             {

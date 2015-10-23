@@ -160,12 +160,14 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Common\Controllers\CommentController.cs" />
+    <Compile Include="Areas\Common\Controllers\BusketController.cs" />
+    <Compile Include="Areas\Common\Models\CommentCreateViewModel.cs" />
     <Compile Include="Areas\Common\Controllers\GameController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\GamesController.cs" />
-    <Compile Include="Areas\Common\Controllers\HomeController.cs" />
     <Compile Include="Areas\Common\Controllers\PublisherController.cs" />
+    <Compile Include="Areas\Common\Models\GameCreateViewModel.cs" />
+    <Compile Include="Areas\Common\Models\OrderViewModel.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Filters\HandleAllErrorAttribute.cs" />
@@ -174,10 +176,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Mapping\Profiles\PublisherDtoProfile.cs" />
-    <Compile Include="Infrastructure\Mapping\Profiles\CommentDtoProfile.cs" />
-    <Compile Include="Infrastructure\Mapping\Profiles\GameDtoProfile.cs" />
-    <Compile Include="Infrastructure\Mapping\WebMappingProfile.cs" />
+    <Compile Include="Utils\WebMappingProfile.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
     <Compile Include="Models\PublisherViewModel.cs" />
@@ -190,7 +189,7 @@
     <Content Include="Global.asax" />
     <Content Include="Areas\Common\Views\Game\Index.cshtml" />
     <Content Include="Areas\Common\Views\Publisher\Details.cshtml" />
-    <Content Include="Areas\Common\Views\Publisher\New.cshtml" />
+    <Content Include="Areas\Common\Views\Publisher\Create.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -212,11 +211,10 @@
     <Content Include="Views\Shared\_GameCount.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Common\Models\" />
+    <Folder Include="Areas\Common\Views\Busket\" />
     <Folder Include="Areas\Common\Views\Shared\" />
     <Folder Include="Areas\Security\Controllers\" />
     <Folder Include="Areas\Security\Models\" />
@@ -224,7 +222,6 @@
     <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -255,7 +252,6 @@
     <Content Include="Areas\Common\Views\Game\Create.cshtml" />
     <Content Include="Areas\Common\Views\Game\Edit.cshtml" />
     <Content Include="Areas\Common\Views\Game\Delete.cshtml" />
-    <Content Include="Areas\Common\Views\Home\Index.cshtml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

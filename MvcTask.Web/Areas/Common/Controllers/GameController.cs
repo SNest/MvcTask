@@ -1,21 +1,32 @@
 ﻿namespace MvcTask.Web.Areas.Common.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     using AutoMapper;
 
     using MvcTask.Application.AppServices.Abstract;
     using MvcTask.Application.DTOs.Concrete;
+    using MvcTask.Web.Areas.Common.Models;
     using MvcTask.Web.Models;
 
     public class GameController : Controller
     {
+        private readonly ICommentAppService commentAppService;
+
         private readonly IGameAppService gameAppService;
 
-        public GameController(IGameAppService gameAppService)
+        private readonly IPublisherAppService publisherAppService;
+
+        public GameController(
+            IGameAppService gameAppService,
+            ICommentAppService commentAppService,
+            IPublisherAppService publisherAppService)
         {
             this.gameAppService = gameAppService;
+            this.commentAppService = commentAppService;
+            this.publisherAppService = publisherAppService;
         }
 
         public ActionResult Index()
@@ -30,11 +41,22 @@
 
         public ActionResult Create()
         {
+            var publishers = this.publisherAppService.Get();
+            var selectList =
+                publishers.Select(
+                    publisher => new SelectListItem
+                                     {
+                                         //Selected = (publisher.Id == publishers.First().Id),
+                                         Text = publisher.CompanyName,
+                                         Value = publisher.Id.ToString()
+                                     });
+
+            ViewBag.Publishers = selectList;
             return this.View();
         }
 
         [HttpPost]
-        public ActionResult Create(GameViewModel game)
+        public ActionResult Create(GameCreateViewModel game)
         {
             if (this.ModelState.IsValid)
             {
@@ -85,6 +107,20 @@
         public ActionResult Download(string key)
         {
             return this.File(new byte[0], ".txt");
+        }
+
+        public ActionResult Comments(string gameKey)
+        {
+            return this.Json(
+                Mapper.Map<IEnumerable<CommentDto>>(this.commentAppService.GetByGameKey(gameKey)),
+                JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult NewComment(string gameKey, CommentViewModel comment)
+        {
+            this.commentAppService.Create(Mapper.Map<CommentViewModel, CommentDto>(comment));
+            return this.RedirectToAction("Comments", new { gameKey });
         }
     }
 }

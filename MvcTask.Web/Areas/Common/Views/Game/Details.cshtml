@@ -5,12 +5,60 @@
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <fieldset>
-    <legend>GameViewModel</legend>
+    <legend>Game information</legend>
+
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Key)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Key)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description)
+    </div>
+
+    <div class="display-field">
+        @Html.ActionLink("Publisher", "Details", "Publisher", new {area = "Common", companyName = Model.Publisher.CompanyName })
+    </div>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div>
+        <p>
+            Genres :
+            @foreach (var genre in Model.Genres)
+            {
+                <span>@genre</span>
+            }
+        </p>
+    </div>
+
+    <div>
+        <p>
+            PlatformType :
+            @foreach (var platformType in Model.PlatformTypes)
+            {
+                <span>@platformType</span>
+            }
+        </p>
+    </div>
+
+    <p>
+        @Html.ActionLink("Buy", "Buy", "Busket", new { gameKey = Model.Key }, null)
+        @Html.ActionLink("Download", "Download", "Game", new { gameKey = Model.Key }, new { target = "_blank" })|
+        @Html.ActionLink("Comments", "Comments", "Game", new { gameKey = Model.Key }, null)
+    </p>
 </fieldset>
-<p>
-    @(this.Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ })) |
-    @(this.Html.ActionLink("Back to List", "Index"))
-</p>
+

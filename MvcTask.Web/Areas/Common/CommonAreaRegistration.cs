@@ -14,11 +14,11 @@
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-                "Common_default",
-                "Common/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+            //context.MapRoute(
+            //    "Common_default",
+            //    "{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //).DataTokens.Add("area", "Common");
         }
     }
 }

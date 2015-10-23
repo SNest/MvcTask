@@ -7,11 +7,11 @@
 
     public class ContextInitializer : DropCreateDatabaseAlways<EfContext>
     {
-        private EfContext db;
+        private EfContext context;
 
-        protected override void Seed(EfContext db)
+        protected override void Seed(EfContext context)
         {
-            this.db = db;
+            this.context = context;
 
             //unique indexes
             this.CreateIndex("Key", typeof(Game));
@@ -19,13 +19,13 @@
             this.CreateIndex("Type", typeof(PlatformType));
 
             //Data
-            db.Genres.Add(
+            context.Genres.Add(
                 new Genre
                     {
                         Name = "Strategy",
                         ChildGenres = new[] { new Genre { Name = "RTS" }, new Genre { Name = "TBS" } }
                     });
-            db.Genres.Add(
+            context.Genres.Add(
                 new Genre
                     {
                         Name = "Races",
@@ -36,7 +36,7 @@
                                     new Genre { Name = "Formula" }, new Genre { Name = "Off-road" }
                                 }
                     });
-            db.Genres.Add(
+            context.Genres.Add(
                 new Genre
                     {
                         Name = "Action",
@@ -48,20 +48,20 @@
                                 }
                     });
 
-            db.Genres.Add(new Genre { Name = "RPG" });
-            db.Genres.Add(new Genre { Name = "Sports" });
-            db.Genres.Add(new Genre { Name = "Adventure" });
-            db.Genres.Add(new Genre { Name = "Puzzle&Skill" });
+            context.Genres.Add(new Genre { Name = "RPG" });
+            context.Genres.Add(new Genre { Name = "Sports" });
+            context.Genres.Add(new Genre { Name = "Adventure" });
+            context.Genres.Add(new Genre { Name = "Puzzle&Skill" });
 
-            var moba = db.Genres.Add(new Genre { Name = "MOBA" });
+            var moba = context.Genres.Add(new Genre { Name = "MOBA" });
 
-            db.PlatformTypes.Add(new PlatformType { Type = "Mobile" });
-            db.PlatformTypes.Add(new PlatformType { Type = "Browser" });
-            var desktop = db.PlatformTypes.Add(new PlatformType { Type = "Desktop" });
-            db.PlatformTypes.Add(new PlatformType { Type = "Console" });
+            context.PlatformTypes.Add(new PlatformType { Type = "Mobile" });
+            context.PlatformTypes.Add(new PlatformType { Type = "Browser" });
+            var desktop = context.PlatformTypes.Add(new PlatformType { Type = "Desktop" });
+            context.PlatformTypes.Add(new PlatformType { Type = "Console" });
 
             var dota =
-                db.Games.Add(
+                context.Games.Add(
                     new Game
                         {
                             Name = "Dota 2",
@@ -71,7 +71,7 @@
                             PlatformTypes = new[] { desktop }
                         });
 
-            db.Comments.Add(
+            context.Comments.Add(
                 new Comment
                     {
                         Game = dota,
@@ -85,7 +85,7 @@
         private void CreateIndex(string field, Type table)
         {
             var command = String.Format("CREATE UNIQUE INDEX IX_{0} ON [{1}s]([{0}])", field, table.Name);
-            this.db.Database.ExecuteSqlCommand(command);
+            this.context.Database.ExecuteSqlCommand(command);
         }
     }
 }

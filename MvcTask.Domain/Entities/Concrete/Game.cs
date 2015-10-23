@@ -25,7 +25,7 @@
 
         public long? PublisherId { get; set; }
 
-        public Publisher Publisher { get; set; }
+        public virtual Publisher Publisher { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 

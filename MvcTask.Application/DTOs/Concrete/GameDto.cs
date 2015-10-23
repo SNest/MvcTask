@@ -16,6 +16,10 @@
 
         public bool Discontinued { get; set; }
 
+        public long? PublisherId { get; set; }
+
+        public PublisherDto Publisher { get; set; }
+
         public IEnumerable<CommentDto> Comments { get; set; }
 
         public IEnumerable<GenreDto> Genres { get; set; }

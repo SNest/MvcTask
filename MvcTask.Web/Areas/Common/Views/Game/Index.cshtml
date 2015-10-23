@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<MvcTask.Web.Models.GameViewModel>
 
-<p>
-    @(this.Html.ActionLink("Create New", "Create"))
-</p>
+@{
+    this.ViewBag.Title = "Edit";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @(this.Html.DisplayForModel("GameListTemplate"))
 
-<div>
-    @(this.Html.ActionLink("Download game", "Download", "Game", null, new { target = "_blank" }))
-</div>

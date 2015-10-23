@@ -8,7 +8,7 @@
     using AutoMapper;
 
     using MvcTask.Application.Utils;
-    using MvcTask.Web.Infrastructure.Mapping;
+    using MvcTask.Web.Utils;
 
     public class MvcApplication : HttpApplication
     {
